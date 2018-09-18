@@ -34,7 +34,7 @@ export default class HeadTag extends React.Component {
 
           this.headTags = headTags;
 
-          if (this.state.canUseDOM) {
+          if (this.state.canUseDOM && !headTags.serverOnly) {
             if (!headTags.shouldRenderTag(Tag, this.index)) {
               return null;
             }
@@ -46,7 +46,7 @@ export default class HeadTag extends React.Component {
           }
 
           const ServerComp = (
-            <Tag data-rh="" {...rest}>
+            <Tag data-rh={headTags.serverOnly ? null : ''} {...rest}>
               {outputTemplate(headTags, children)}
             </Tag>
           );

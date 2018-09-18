@@ -6,6 +6,7 @@ const cascadingTags = ['title', 'meta'];
 
 export default class HeadProvider extends React.Component {
   static defaultProps = {
+    serverOnly: false,
     titleTemplate: '%s',
   };
 
@@ -64,13 +65,16 @@ export default class HeadProvider extends React.Component {
       headTags.push(tagNode);
     },
 
+    serverOnly: this.props.serverOnly,
     titleTemplate: this.props.titleTemplate,
   };
 
   componentDidMount() {
     const ssrTags = document.head.querySelectorAll(`[data-rh=""]`);
-    // `forEach` on `NodeList` is not supported in Googlebot, so use a workaround
-    Array.prototype.forEach.call(ssrTags, ssrTag => ssrTag.remove());
+    if (!this.props.serverOnly) {
+      // `forEach` on `NodeList` is not supported in Googlebot, so use a workaround
+      Array.prototype.forEach.call(ssrTags, ssrTag => ssrTag.remove());
+    }
   }
 
   render() {

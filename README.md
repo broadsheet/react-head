@@ -86,9 +86,12 @@ const App = () => (
 
 ```js
 <HeadProvider
+  serverOnly // Only render tags on the server, do not replace on client render
   titleTemplate="%s - Sitename" // Title will be output per template, replacing %s with title text
   />
 ```
+
+Note that the `serverOnly` option will also remove the `data-rh=""` properties from the rendered tags, as the client does not use them.
 
 ## Contributing
 
