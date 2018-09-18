@@ -35,7 +35,11 @@ export default class HeadTag extends React.Component {
 
           this.headTags = headTags;
 
-          if (canUseDOM && !headTags.serverOnly) {
+<<<<<<< HEAD
+          if (canUseDOM) {
+=======
+          if (this.state.canUseDOM && !headTags.serverOnly) {
+>>>>>>> Add serverOnly prop to skip client side render
             if (!headTags.shouldRenderTag(Tag, this.index)) {
               return null;
             }

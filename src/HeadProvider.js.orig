@@ -4,6 +4,10 @@ import { Provider } from './context';
 const cascadingTags = ['title', 'meta'];
 
 export default class HeadProvider extends React.Component {
+  static defaultProps = {
+    serverOnly: false,
+  };
+
   indices = new Map();
 
   state = {
@@ -58,16 +62,23 @@ export default class HeadProvider extends React.Component {
       }
       headTags.push(tagNode);
     },
+
+    serverOnly: this.props.serverOnly,
   };
 
   componentDidMount() {
-    const {serverOnly} = this.props;
     const ssrTags = document.head.querySelectorAll(`[data-rh=""]`);
-    if (!serverOnly) {
-      // `forEach` on `NodeList` is not supported in Googlebot, so use a workaround
+<<<<<<< HEAD
+    // `forEach` on `NodeList` is not supported in Googlebot, so use a workaround
     Array.prototype.forEach.call(ssrTags, ssrTag =>
       ssrTag.parentNode.removeChild(ssrTag)
-    )};
+    );
+=======
+    if (!this.props.serverOnly) {
+      // `forEach` on `NodeList` is not supported in Googlebot, so use a workaround
+      Array.prototype.forEach.call(ssrTags, ssrTag => ssrTag.remove());
+    }
+>>>>>>> Add serverOnly prop to skip client side render
   }
 
   render() {
@@ -82,7 +93,3 @@ export default class HeadProvider extends React.Component {
     return <Provider value={this.state}>{children}</Provider>;
   }
 }
-
-HeadProvider.defaultProps = {
-  serverOnly: false,
-};
