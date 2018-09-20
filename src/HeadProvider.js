@@ -4,6 +4,10 @@ import { Provider } from './context';
 const cascadingTags = ['title', 'meta'];
 
 export default class HeadProvider extends React.Component {
+  static defaultProps = {
+    titleTemplate: '%s',
+  };
+
   indices = new Map();
 
   state = {
@@ -58,6 +62,8 @@ export default class HeadProvider extends React.Component {
       }
       headTags.push(tagNode);
     },
+
+    titleTemplate: this.props.titleTemplate,
   };
 
   componentDidMount() {
