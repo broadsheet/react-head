@@ -6,13 +6,11 @@ import Footer from './Footer';
 import logo from './logo.svg';
 import './Contact.css';
 
-const NestedComponent = () => (
-  <Title>Contact | Example react-head App (with cascading title)</Title>
-);
+const NestedComponent = () => <Title>Contact (with cascade)</Title>;
 
 const Contact = () => (
   <div className="Contact">
-    <Title>Contact | Example react-head App</Title>
+    <Title>Contact</Title>
     <Link rel="canonical" content="http://jeremygayed.com/" />
     <Meta name="keywords" content="Contact,Example,React,Header" />
     <div className="Contact-header">
